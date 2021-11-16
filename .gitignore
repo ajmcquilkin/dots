@@ -1,0 +1,22 @@
+# https://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
+
+# Ignore everything by default
+
+/*
+
+# Files
+
+!.gitignore
+
+# Directories
+
+!alacritty
+!autorandr
+!dunst
+!eww
+!i3
+!neofetch
+!personal
+!picom
+!polybar
+!rofi

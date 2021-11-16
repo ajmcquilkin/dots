@@ -1,0 +1,75 @@
+(include "structure/variables.yuck")
+(include "structure/elements/toggleButton.yuck")
+
+(defvar isNetworkExpanded false)
+(defvar isBackgroundExpanded false)
+(defvar backgroundInputValue "placeholder")
+(defvar testState false)
+
+(defpoll networks :interval "1s" `iwctl station wlan0 get-networks`)
+
+(defwidget networkIndicator []
+  (box
+    :orientation "v"
+    :space-evenly false
+    :spacing 20
+    
+    (button
+      :onclick "${eww} update isNetworkExpanded=${isNetworkExpanded ? false : true}"
+      ""
+    )
+    
+    (revealer
+      :transition "slidedown"
+      :reveal isNetworkExpanded
+      :duration "0.3s"
+      "${networks}"
+    )
+  )
+)
+
+(defwidget backgroundIndicator []
+  (box
+    :orientation "v"
+    :space-evenly false
+    
+    (button
+      :onclick "${eww} update isBackgroundExpanded=${isBackgroundExpanded ? false : true}"
+      "background"
+    )
+    
+    (input
+      :value "${backgroundInputValue}"
+      :onchange "${eww} update backgroundInputValue=\"{}\""
+      :timeout "1s"
+    )
+    
+    (revealer
+      :transition "slidedown"
+      :reveal isBackgroundExpanded
+      :duration "0.3s"
+      "Content"
+    )
+  )
+)
+
+(defwidget leftBar []
+  (box
+    :orientation "h"
+    :space-evenly false
+    
+    (toggleButton
+      :state testState
+      :stateName "testState"
+      :script "$HOME/.eww/bar/structure/scripts/set_bluetooth.sh"
+      :label "Bluetooth"
+      :icon ""
+    )
+    
+    "${workspace}"
+    
+    ; "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024,2)}"
+    
+    (backgroundIndicator)
+  )
+)

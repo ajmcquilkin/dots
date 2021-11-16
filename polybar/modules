@@ -1,0 +1,235 @@
+[module/ewmh]
+type = internal/i3
+format =  <label-state>
+
+pin-workspaces = true
+
+label-focused-padding = 2
+label-unfocused-padding = 2
+label-visible-padding = 2
+label-urgent-padding = 2
+label-separator-padding = 2
+
+label-focused-foreground = #ffffff
+label-focused-background = #383838
+
+; type = internal/xworkspaces
+
+; label-active-foreground = #ffffff
+; label-active-background = #383838
+; label-active-underline = #fba922
+
+; label-urgent-foreground = #ffffff
+; label-urgent-background = #383838
+; label-urgent-underline = #fba922
+
+; label-occupied-underline = #fba922
+
+; label-active = %name%
+; label-occupied = %name%
+; label-urgent = %name%
+; label-empty = %name%
+
+; label-active-padding = 2
+; label-urgent-padding = 2
+; label-occupied-padding = 2
+; label-empty-padding = 2
+
+; ---------------- ;
+
+[module/musicprevious]
+type = custom/text
+content = 
+content-padding = 1
+label-active-font = 1
+
+click-left = exec playerctl previous &
+tail = true
+
+; ---------------- ;
+
+[module/musicinfo]
+type = custom/script
+
+interval = 1
+exec = python ~/.config/polybar/scripts/music.sh
+
+format = <label>
+format-padding = 1
+
+label = %output%
+tail = true
+click-left = exec playerctl play-pause &
+
+; ---------------- ;
+
+[module/musicnext]
+type = custom/text
+content = 
+content-padding = 1
+label-active-font = 0
+
+click-left = exec playerctl next
+tail = true
+
+; ---------------- ;
+
+[module/volume]
+type = custom/script
+
+interval = 0.3
+exec = ~/.config/polybar/scripts/volume.sh
+
+format = <label>
+format-padding = 1
+	
+label = %output%
+
+; ---------------- ;
+
+[module/network]
+type = custom/script
+
+interval = 5
+exec = ~/.config/polybar/scripts/network.sh
+
+format = <label>
+format-padding = 1
+
+label = %output%
+
+; ---------------- ;
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+format = <label-indicator>
+format-padding = 1
+
+; ---------------- ;
+
+[module/battery]
+type = internal/battery
+poll-interval = 5
+
+full-at = 99
+battery = CMB0
+adapter = ADP1
+
+format-charging = <label-charging>
+format-discharging = <label-discharging>
+
+label-charging =  %percentage%%
+label-discharging =  %percentage%%
+label-full = Charged
+
+; ---------------- ;
+
+[module/cpu]
+type = internal/cpu
+interval = 3
+
+format = <label>
+format-padding = 1
+label =  %percentage%%
+
+; ---------------- ;
+
+[module/ram]
+type = internal/memory
+interval = 3
+
+format = <label>
+format-padding = 1
+label =  %percentage_used%%
+
+; ---------------- ;
+
+[module/time]
+type = internal/date
+interval = 1
+
+time = "%I:%M %p" 
+time-alt = "%I:%M:%S"
+
+format-padding = 1
+label =  %time%
+
+; ---------------- ;
+
+[module/date]
+type = internal/date
+interval = 3600
+
+date= "%m/%d/%Y"
+date-alt = "%m/%d/%Y%"
+
+; format-padding = 1
+label =  %date%
+
+; ---------------- ;
+
+[module/brightness]
+type = internal/backlight
+card = intel_backlight
+
+format = <label>
+label =  %percentage%%
+
+; ---------------- ;
+
+[module/random_background]
+type = custom/text
+content = 
+content-padding = 1
+
+click-left = bash ~/.config/i3/scripts/background/set_random_background.sh
+
+; ---------------- ;
+
+[module/url_background]
+type = custom/text
+content = 
+format-padding = 1
+
+click-left = ~/.config/personal/background/generic_selector/generic_selector.out | bash ~/.config/i3/scripts/background/src/set_background_image.sh -
+
+; ---------------- ;
+
+[module/sleep]
+type = custom/text
+content = 
+format-padding = 1
+
+click-left = loginctl lock-session
+; ---------------- ;
+
+[module/shutdown]
+type = custom/text
+content = 
+format-padding = 1
+
+click-left = sudo shutdown now
+
+; ---------------- ;
+
+[module/3d_printer]
+type = custom/script
+
+interval = 10
+exec = ~/.config/polybar/scripts/3d_printer.sh
+
+format = <label>
+content-padding = 1
+label = %output%
+
+click-left = xdg-open "http://192.168.10.178"
+
+; ---------------- ;
+
+[module/display_refresh]
+type = custom/text
+content = 
+content-padding = 1
+
+click-left = ~/.config/i3/scripts/display_startup.sh

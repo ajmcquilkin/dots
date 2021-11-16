@@ -1,0 +1,18 @@
+(include "structure/variables.yuck")
+
+(defwidget toggleButton [state stateName script label icon]
+  (box
+    :orientation "horizontal"
+    :halign "center"
+    
+    (button
+      :onclick "${script} ${state ? 'off' : 'on'} ${stateName} $HOME/.eww/bar"
+      (box
+        :orientation "vertical"
+        
+        {state ? icon : "off"}
+        {label}
+      )
+    )
+  )
+)

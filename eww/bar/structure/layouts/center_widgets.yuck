@@ -1,0 +1,125 @@
+(include "structure/variables.yuck")
+
+(defvar isMusicExpanded false)
+
+(deflisten currSongTitle `playerctl --follow metadata --format "{{title}}"`)
+(deflisten currSongArtist `playerctl --follow metadata --format "{{artist}}"`)
+(deflisten currSongAlbum `playerctl --follow metadata --format "{{album}}"`)
+(deflisten playerStatus `playerctl --follow status`)
+
+(defpoll currAlbumArt :interval "1s" `/home/ajmcquilkin/.eww/bar/structure/scripts/music`)
+(deflisten currAlbumArtListening `/home/ajmcquilkin/.eww/bar/structure/scripts/music_stream`)
+
+(defwidget songInfo [imageSize]
+  (box
+    :orientation "h"
+    :space-evenly false
+    :halign "fill"
+    :valign "center"
+    :style "background-color: black;"
+    
+    (image
+      :path "${currAlbumArt}"
+      :height imageSize
+    )
+    
+    (box
+      :orientation "v"
+      :space-evenly true
+      :halign "left"
+      :valign "center"
+      :hexpand true
+      :vexpand true
+      
+      (label
+        :hexpand true
+        :text "Title: ${currSongTitle}"
+      )
+      
+      (label
+        :hexpand true
+        :text "Artist: ${currSongArtist}"
+      )
+      
+      (label
+        :hexpand true
+        :text "Album: ${currSongAlbum}"
+      )
+    )
+  )
+)
+
+(defwidget centerMusicControls [displayText isActive]
+  (box
+    :width 480
+    
+    (box
+      :orientation "h"
+      :space-evenly false
+      :spacing 20
+      :halign "center"
+      :valign "center"
+      
+      (button
+        :class "music-toggle"
+        :onclick "playerctl play-pause"
+        {isActive ? displayText : "No Players"}
+      )
+      
+      (button
+        :onclick "/home/ajmcquilkin/GitHub/eww/target/release/eww -c /home/ajmcquilkin/.eww/bar update isMusicExpanded=${isMusicExpanded ? false : true}"
+        {isMusicExpanded ? "" : ""}
+      )
+    )
+  )
+)
+
+(defwidget musicControls []
+  (centerbox
+    :orientation "h"
+    :style "padding: 12px 24px; background-color: darkgray;"
+    
+    (button
+      :class "music-previous"
+      :hexpand false
+      :onclick "playerctl previous"
+      ""
+    )
+    
+    (centerMusicControls
+      :isActive {playerStatus != ""}
+      :displayText "[${playerStatus}] ${currSongTitle} [${currSongArtist}]"
+    )
+    
+    (button
+      :class "music-next"
+      :hexpand false
+      :onclick "playerctl next"
+      ""
+    )
+  )
+)
+
+(defwidget musicWidget []
+  (box
+    :orientation "v"
+    :space-evenly false
+    :halign "fill"
+    :valign "top"
+    :width 600
+    
+    (musicControls)
+    
+    (revealer
+      :transition "slidedown"
+      :reveal {isMusicExpanded && playerStatus != ""}
+      :duration "0.3s"
+      
+      (songInfo
+        :imageSize 120
+      )
+    )
+  )
+)
+
+(defwidget centerBar [] (musicWidget))

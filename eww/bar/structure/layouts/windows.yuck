@@ -1,0 +1,68 @@
+(include "structure/layouts/left_widgets.yuck")
+(include "structure/layouts/center_widgets.yuck")
+(include "structure/layouts/right_widgets.yuck")
+(include "structure/variables.yuck")
+
+(defwindow leftBar
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :anchor "top left"
+  )
+  :reserve (struts :distance "80px" :side "top")
+  :stacking "fg"
+  :wm-ignore true
+  
+  (leftBar)
+)
+
+(defwindow centerBar
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :anchor "top center"
+  )
+  :reserve (struts :distance "80px" :side "top")
+  :stacking "fg"
+  :wm-ignore true
+  :class "none"
+  
+  (centerBar)
+)
+
+(defwindow rightBar
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :anchor "top right"
+  )
+  :reserve (struts :distance "80px" :side "top")
+  :stacking "fg"
+  :wm-ignore true
+  
+  (rightBar)
+)
+
+(defwindow bar
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "100%"
+    :anchor "top right"
+  )
+  :stacking "fg"
+  :focusable true
+  
+  (centerbox
+    :orientation "h"
+    :hexpand true
+    
+    (leftBar)
+    (centerBar)
+    (rightBar)
+  )
+)

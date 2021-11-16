@@ -1,0 +1,7 @@
+(defwidget rightBar []
+  (box
+    :orientation "h"
+    :space-evenly false
+    "right content"
+  )
+)

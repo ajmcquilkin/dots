@@ -1,0 +1,45 @@
+[global/wm]
+; margin-top = 0
+; margin-bottom = 0
+include-file = ~/.config/polybar/modules
+; include-file = ~/.config/polybar/colors
+
+; Enables hot refreshing - https://github.com/polybar/polybar/issues/563
+enable-ipc = true
+
+[colors]
+background = #F0222222
+foreground = #dfdfdf
+
+[bar/default]
+; width = 100%:-42
+width = 84%
+height = 36
+; offset-x = 21
+offset-x = 8%
+offset-y = 15
+
+override-redirect = true
+fixed-center = true
+wm-restack = i3
+
+monitor = ${env:MONITOR:}
+
+; bottom = true
+
+module-margin-left = 1
+module-margin-right = 1
+
+radius-top = 4.0
+radius-bottom = 4.0
+padding = 2
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = JetBrainsMono:size=11:style=Regular;1
+font-1 = Feather:size=13:style=Regular;2
+
+modules-left = ewmh network url_background display_refresh 3d_printer
+modules-center = musicprevious musicinfo musicnext
+modules-right = brightness volume battery time date sleep shutdown
