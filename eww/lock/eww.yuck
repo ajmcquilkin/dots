@@ -1,0 +1,113 @@
+(defvar iconSize "21px")
+(defvar tasks "")
+
+(defpoll timezone
+  :initial ""
+  :interval "3600s"
+  `timedatectl | gawk -F': ' ' $1 ~ /Time zone/ {print $2}'`
+)
+
+(deflisten currTrack
+  :initial ""
+  `playerctl --follow metadata --format '{{title}} - {{artist}}'`
+)
+
+(deflisten musicStatus
+  :initial "Paused"
+  `playerctl --follow status`
+)
+
+(defwidget labeledIcon [icon content ?onclick]
+  (button
+    :onclick onclick
+    :timeout "500ms"
+    :class "icon-container"
+    
+    (box
+      :orientation "h"
+      :space-evenly false
+      :spacing 18
+      :class "icon-box-container"
+      
+      (image
+        :class "icon"
+        :path "./icons/${icon}_${iconSize}.svg"
+        :width 21
+        :height 21
+      )
+      
+      (box
+        :class "content"
+        "${content}"
+      )
+    )
+  )
+)
+
+(defwindow lockLeft
+  :geometry (geometry
+    :x "60px"
+    :y "60px"
+    :anchor "top left"
+  )
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore true
+  :class "left-container"
+  
+  (box
+    :orientation "v"
+    :space-evenly false
+    :spacing 18
+    
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 6
+      
+      (labeledIcon
+        :icon "music"
+        :content "${musicStatus == "Playing" ? currTrack : 'No Tracks Playing'}"
+        :onclick `playerctl play-pause`
+      )
+      
+      (labeledIcon
+        :icon "globe"
+        :content "${timezone}"
+      )
+      
+      (labeledIcon
+        :icon "battery"
+        :content "${EWW_BATTERY["CMB0"].capacity}%, ${EWW_BATTERY["CMB0"].status}"
+      )
+    )
+    
+    (label
+      :text tasks
+      :class "tasks-list"
+    )
+  )
+  
+)
+
+(defwindow lockRight
+  :geometry (geometry
+    :x "-60px"
+    :y "60px"
+    :anchor "top right"
+  )
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore true
+  :class "right-container"
+  
+  (box
+    :orientation "h"
+    
+    (image
+      :path "./icons/logo-white-transparent.svg"
+      :width 48
+      :height 48
+    )
+  )
+)

@@ -4,7 +4,7 @@
 
 killall -q "polybar"
 
-~/.config/i3/scripts/monitor_setup.sh
-~/.config/i3/scripts/background/set_background.sh
-~/.config/polybar/scripts/launch_polybar.sh
+/home/ajmcquilkin/.config/i3/scripts/monitor_setup.sh
+/home/ajmcquilkin/.config/i3/scripts/background/set_background.sh
+/home/ajmcquilkin/.config/polybar/scripts/launch_polybar.sh
 

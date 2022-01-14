@@ -22,7 +22,7 @@
     (revealer
       :transition "slidedown"
       :reveal isNetworkExpanded
-      :duration "0.3s"
+      :duration "300ms"
       "${networks}"
     )
   )
@@ -47,29 +47,30 @@
     (revealer
       :transition "slidedown"
       :reveal isBackgroundExpanded
-      :duration "0.3s"
+      :duration "300ms"
       "Content"
     )
   )
 )
 
 (defwidget leftBar []
-  (box
-    :orientation "h"
-    :space-evenly false
+  (literal :content workspacesYuck)
+  ; (box
+    ;   :orientation "h"
+    ;   :space-evenly false
     
-    (toggleButton
-      :state testState
-      :stateName "testState"
-      :script "$HOME/.eww/bar/structure/scripts/set_bluetooth.sh"
-      :label "Bluetooth"
-      :icon ""
-    )
+    ;   (toggleButton
+      ;     :state testState
+      ;     :stateName "testState"
+      ;     :script "$HOME/.eww/bar/structure/scripts/set_bluetooth.sh"
+      ;     :label "Bluetooth"
+      ;     :icon ""
+    ;   )
     
-    "${workspace}"
+    ;   "${activeWorkspace}"
     
-    ; "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024,2)}"
+    ;   ; "${round(EWW_RAM.used_mem / 1024 / 1024 / 1024,2)}"
     
-    (backgroundIndicator)
-  )
+    ;   (backgroundIndicator)
+  ; )
 )

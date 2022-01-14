@@ -51,7 +51,7 @@
 
 (defwidget centerMusicControls [displayText isActive]
   (box
-    :width 480
+    ; :width 480
     
     (box
       :orientation "h"
@@ -66,10 +66,10 @@
         {isActive ? displayText : "No Players"}
       )
       
-      (button
-        :onclick "/home/ajmcquilkin/GitHub/eww/target/release/eww -c /home/ajmcquilkin/.eww/bar update isMusicExpanded=${isMusicExpanded ? false : true}"
-        {isMusicExpanded ? "" : ""}
-      )
+      ; (button
+        ;   :onclick "/home/ajmcquilkin/GitHub/eww/target/release/eww -c /home/ajmcquilkin/.eww/bar update isMusicExpanded=${isMusicExpanded ? false : true}"
+        ;   {isMusicExpanded ? "" : ""}
+      ; )
     )
   )
 )
@@ -77,7 +77,7 @@
 (defwidget musicControls []
   (centerbox
     :orientation "h"
-    :style "padding: 12px 24px; background-color: darkgray;"
+    ; :style "padding: 12px 24px; background-color: darkgray;"
     
     (button
       :class "music-previous"

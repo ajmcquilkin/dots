@@ -52,7 +52,7 @@ tail = true
 type = custom/script
 
 interval = 1
-exec = python ~/.config/polybar/scripts/music.sh
+exec = python /home/ajmcquilkin/.config/polybar/scripts/music.sh
 
 format = <label>
 format-padding = 1
@@ -78,7 +78,7 @@ tail = true
 type = custom/script
 
 interval = 0.3
-exec = ~/.config/polybar/scripts/volume.sh
+exec = /home/ajmcquilkin/.config/polybar/scripts/volume.sh
 
 format = <label>
 format-padding = 1
@@ -91,7 +91,7 @@ label = %output%
 type = custom/script
 
 interval = 5
-exec = ~/.config/polybar/scripts/network.sh
+exec = /home/ajmcquilkin/.config/polybar/scripts/network.sh
 
 format = <label>
 format-padding = 1
@@ -183,7 +183,7 @@ type = custom/text
 content = 
 content-padding = 1
 
-click-left = bash ~/.config/i3/scripts/background/set_random_background.sh
+click-left = bash /home/ajmcquilkin/.config/i3/scripts/background/set_random_background.sh
 
 ; ---------------- ;
 
@@ -192,7 +192,7 @@ type = custom/text
 content = 
 format-padding = 1
 
-click-left = ~/.config/personal/background/generic_selector/generic_selector.out | bash ~/.config/i3/scripts/background/src/set_background_image.sh -
+click-left = /home/ajmcquilkin/.config/personal/background/generic_selector/generic_selector.out | bash /home/ajmcquilkin/.config/i3/scripts/background/src/set_background_image.sh -
 
 ; ---------------- ;
 
@@ -217,7 +217,7 @@ click-left = sudo shutdown now
 type = custom/script
 
 interval = 10
-exec = ~/.config/polybar/scripts/3d_printer.sh
+exec = /home/ajmcquilkin/.config/polybar/scripts/3d_printer.sh
 
 format = <label>
 content-padding = 1
@@ -232,4 +232,4 @@ type = custom/text
 content = 
 content-padding = 1
 
-click-left = ~/.config/i3/scripts/display_startup.sh
+click-left = /home/ajmcquilkin/.config/i3/scripts/display_startup.sh

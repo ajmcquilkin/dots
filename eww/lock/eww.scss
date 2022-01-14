@@ -1,0 +1,35 @@
+@mixin Graphie15px {
+  font-family: Graphie, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: white;
+}
+
+* {
+  all: unset;
+  // font-family: Nasalization, sans-serif;
+  // font-family: Graphie, sans-serif;
+  
+  .icon-container {
+    .icon-box-container {
+
+      .icon {
+        font-family: Feather, sans-serif;
+        font-size: 21px;
+        color: white;
+      }
+  
+      .content {
+        @include Graphie15px();
+
+        // font-family: Nasalization, sans-serif;
+        // margin-top: -0.27em;
+      }
+    }
+  }
+
+  .tasks-list {
+    @include Graphie15px();
+    font-size: 15px;
+  }
+}

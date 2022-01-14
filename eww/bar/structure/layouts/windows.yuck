@@ -3,6 +3,15 @@
 (include "structure/layouts/right_widgets.yuck")
 (include "structure/variables.yuck")
 
+(defvar wifiStatus "enabled") ; TODO UPDATE THIS VALUE ON STARTUP
+
+(defvar iconSpacing 9)
+
+(deflisten workspacesYuck
+  :initial ""
+  `~/.config/eww/bar/structure/scripts/generate_workspaces.sh`
+)
+
 (defwindow leftBar
   :monitor 0
   :geometry (geometry
@@ -29,7 +38,8 @@
   :wm-ignore true
   :class "none"
   
-  (centerBar)
+  (literal :content workspacesYuck)
+  ; (centerBar)
 )
 
 (defwindow rightBar
@@ -47,22 +57,49 @@
 )
 
 (defwindow bar
-  :monitor 0
   :geometry (geometry
-    :x "0px"
-    :y "0px"
+    ; :x "0px"
+    :y "15px"
     :width "100%"
-    :anchor "top right"
+    :height "11px"
+    :anchor "top center"
   )
   :stacking "fg"
+  :reserve (struts :distance "40px" :side "top")
+  :wm-ignore true
   :focusable true
+  
+  ; "${activeWorkspace}"
+  ; "${replace(activeWorkspace,'.* = ','')}"
+  ; "${replace(workspaces,'.* = ','')}"
+  ; (literal :content workspacesYuck)
   
   (centerbox
     :orientation "h"
-    :hexpand true
     
-    (leftBar)
-    (centerBar)
-    (rightBar)
+    (box
+      :orientation "h"
+      :halign "start"
+      :spacing iconSpacing
+      
+      (literal :content workspacesYuck)
+      
+      (button
+        :onclick "~/.config/eww/bar/structure/scripts/set_wifi.sh ${wifiStatus == 'enabled' ? 'off' : 'on'} ."
+        :timeout "3s"
+        "wifi ${wifiStatus}"
+      )
+      
+      (button "bluetooth")
+      (button "layout")
+    )
+    
+    (musicControls)
+    ; (box :orientation "h"
+      ;   (label :text "")
+      ;   (button :onclick `playerctl play-pause` "test")
+      ;   (label :text "")
+    ; )
+    "right"
   )
 )

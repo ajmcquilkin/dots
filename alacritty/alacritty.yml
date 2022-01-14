@@ -1,22 +1,31 @@
-# Font (JetBrains Mono)
+# Font (Fira Code)
 font:
     normal:
-        family: JetBrains Mono
+        family: monospace
         style: Regular
 
     bold:
-        family: JetBrains Mono
+        family: monospace
         style: Bold
 
     italic:
-        family: JetBrains Mono
+        family: monospace
         style: Italic
 
     bold_italic:
-        family: JetBrains Mono
+        family: monospace
         style: Bold Italic
 
-    size: 8
+    size: 10
+
+offset:
+   x: 0.0
+   y: 0.0
+
+glyph_offset:
+   x: 0.0
+   y: 0.0
+
 
 # Colors (Nord)
 colors:
@@ -46,3 +55,8 @@ colors:
      magenta: '#B48EAD'
      cyan:    '#8FBCBB'
      white:   '#ECEFF4'
+
+env:
+   WINIT_X11_SCALE_FACTOR: "1.0"
+
+tabspaces: 4

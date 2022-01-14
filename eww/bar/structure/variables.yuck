@@ -1,10 +1,15 @@
 (defvar configDir "$HOME/.eww/bar")
 (defvar eww "$HOME/GitHub/eww/target/release/eww -c $HOME/.eww/bar")
 
-(deflisten workspace
+(deflisten activeWorkspace
   :initial "0"
-  `$HOME/.eww/bar/structure/scripts/workspace_stream.sh`
-  ; `xprop -spy -root _NET_CURRENT_DESKTOP`
+  ; `$HOME/.config/eww/bar/structure/scripts/workspace_stream.sh`
+  `xprop -spy -root _NET_CURRENT_DESKTOP`
+)
+
+(deflisten workspaces
+  :initial ""
+  `~/.config/eww/bar/structure/scripts/generate_workspaces.sh`
 )
 
 (defpoll hour :interval "1s" `date +%I`)
